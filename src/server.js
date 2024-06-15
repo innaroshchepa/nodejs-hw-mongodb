@@ -33,7 +33,7 @@ export const setupServer = () => {
 
   app.get('/contacts/:contactId', async (req, res) => {
       const { contactId } = req.params;
-      
+
     try {
       const contact = await getContactById(contactId);
 
