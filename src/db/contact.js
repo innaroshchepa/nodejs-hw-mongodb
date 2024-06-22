@@ -4,15 +4,15 @@ const Contact = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Set name for contact'],
     },
     phoneNumber: {
       type: String,
-      required: true,
+      required: [true, 'Set phone number for contact'],
     },
     email: {
       type: String,
-      required: false,
+      optional: true,
     },
     isFavourite: {
       type: Boolean,
@@ -26,7 +26,12 @@ const Contact = new Schema(
     },
   },
   {
-    timestamps: true,
+    versionKey: false,
+    toJSON: {
+      transform: (doc, ret) => {
+        delete ret._v;
+      },
+    },
   },
 );
 
