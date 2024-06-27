@@ -16,9 +16,12 @@ import {
   createContactSchema,
   updateContactSchema,
 } from '../validation/contacts.js';
+import { validateMongoId } from '../middlewares/validateMongoId.js';
 
 
 const router = Router();
+
+router.use('/contacts/:contactsId', validateMongoId('contactsId'));
 
 router.get('/contacts', ctrlWrapper(getContactsController));
 
