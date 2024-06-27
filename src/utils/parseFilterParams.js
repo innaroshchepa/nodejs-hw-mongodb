@@ -1,6 +1,6 @@
 const parseIsFavourite = (isFavourite) => {
-  const isBoolean = typeof isFavourite === 'boolean';
-  if (!isBoolean) return;
+  const isBollean = isFavourite === 'true';
+  return isBollean ? true : false;
 };
 
 const parseContactType = (contactType) => {
