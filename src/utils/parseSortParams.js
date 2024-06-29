@@ -13,7 +13,7 @@ const parseSortBy = (sortBy) => {
     'age',
     'phoneNumber',
     'email',
-    'isFavorite',
+    'isFavourite',
     'contactType',
     'createdAt',
     'updatedAt',
