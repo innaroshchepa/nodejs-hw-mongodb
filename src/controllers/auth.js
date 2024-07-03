@@ -23,7 +23,7 @@ const setupSession = (res, session) => {
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
 
-  res.json({
+  res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
     data: user,
@@ -34,7 +34,7 @@ export const loginUserController = async (req, res) => {
     const session = await loginUser(req.body);
     setupSession(res, session);
 
-  res.json({
+  res.status(201).json({
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
@@ -49,7 +49,7 @@ export const logoutUserController = async (req, res) => {
     throw createHttpError(401, 'Session not found');
   }
 
-  const session = await SessionsCollection.findById(sessionId);
+  const session = await SessionsCollection.findOne(sessionId);
 
   if (!session) {
     throw createHttpError(401, 'Session not found');
