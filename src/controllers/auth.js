@@ -49,7 +49,7 @@ export const logoutUserController = async (req, res) => {
     throw createHttpError(401, 'Session not found');
   }
 
-  const session = await SessionsCollection.findOne(sessionId);
+  const session = await SessionsCollection.findById(sessionId);
 
   if (!session) {
     throw createHttpError(401, 'Session not found');
