@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
     registerUserSchema,
@@ -10,21 +11,21 @@ import {
     logoutUserController,
     refreshUserSessionController,
  } from '../controllers/auth.js';
-import { validateBody } from '../middlewares/validateBody.js';
 
-const router = Router();
 
-router.post(
+const routerAuth = Router();
+
+routerAuth.post(
   '/register',
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
-router.post(
+routerAuth.post(
   '/login',
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
-router.post('/logout', ctrlWrapper(logoutUserController));
-router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+routerAuth.post('/logout', ctrlWrapper(logoutUserController));
+routerAuth.post('/refresh', ctrlWrapper(refreshUserSessionController));
 
-export default router;
+export default routerAuth;
