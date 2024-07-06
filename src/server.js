@@ -25,7 +25,7 @@ export const setupServer = () => {
   );
 
   app.use(rootRouter);
-  
+
   app.use('*', notFoundHandler);
 
   app.use(errorHandler);
