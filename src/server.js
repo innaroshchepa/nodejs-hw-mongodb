@@ -7,15 +7,13 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import rootRouter from './routers/index.js';
 import cookieParser from 'cookie-parser';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
   const app = express();
 
-  app.use(express.json());
-  app.use(cors());
-  app.use(cookieParser());
   app.use(
     pino({
       transport: {
@@ -23,7 +21,11 @@ export const setupServer = () => {
       },
     }),
   );
+  app.use('/api-docs', swaggerDocs());
+  app.use(cors());
+  app.use(cookieParser());
 
+  app.use(express.json());
   app.use(rootRouter);
 
   app.use('*', notFoundHandler);
